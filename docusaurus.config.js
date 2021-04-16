@@ -3,7 +3,7 @@ module.exports = {
   title: 'My Site',
   tagline: 'React cool',
   url: 'https://github.com/EvanMcDowell31',
-  baseUrl: '/',
+  baseUrl: '/EvanDocs/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
