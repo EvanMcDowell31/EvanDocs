@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[9],{81:function(e){e.exports=JSON.parse('{"title":"Recent posts","items":[{"title":"JS Maps and Objects as Keys","permalink":"/EvanDocs/blog/JS Maps and Objects as Keys"},{"title":"Create Your Own Doc io","permalink":"/EvanDocs/blog/Create Your Own Doc io"}]}')}}]);

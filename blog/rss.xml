@@ -1,32 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <rss version="2.0">
     <channel>
-        <title>My Site Blog</title>
+        <title>Evans Docs Blog</title>
         <link>https://github.com/EvanMcDowell31/blog</link>
-        <description>My Site Blog</description>
-        <lastBuildDate>Thu, 30 May 2019 00:00:00 GMT</lastBuildDate>
+        <description>Evans Docs Blog</description>
+        <lastBuildDate>Fri, 21 May 2021 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <item>
-            <title><![CDATA[Welcome]]></title>
-            <link>https://github.com/EvanMcDowell31/EvanDocs/blog/welcome</link>
-            <guid>welcome</guid>
-            <pubDate>Thu, 30 May 2019 00:00:00 GMT</pubDate>
-            <description><![CDATA[Blog features are powered by the blog plugin. Simply add files to the blog directory. It supports tags as well!]]></description>
+            <title><![CDATA[JS Maps and Objects as Keys]]></title>
+            <link>https://github.com/EvanMcDowell31/EvanDocs/blog/JS Maps and Objects as Keys</link>
+            <guid>JS Maps and Objects as Keys</guid>
+            <pubDate>Fri, 21 May 2021 00:00:00 GMT</pubDate>
+            <description><![CDATA[What is a Map]]></description>
         </item>
         <item>
-            <title><![CDATA[Hello]]></title>
-            <link>https://github.com/EvanMcDowell31/EvanDocs/blog/hello-world</link>
-            <guid>hello-world</guid>
-            <pubDate>Wed, 29 May 2019 00:00:00 GMT</pubDate>
-            <description><![CDATA[Welcome to this blog. This blog is created with Docusaurus 2 alpha.]]></description>
-        </item>
-        <item>
-            <title><![CDATA[Hola]]></title>
-            <link>https://github.com/EvanMcDowell31/EvanDocs/blog/hola</link>
-            <guid>hola</guid>
-            <pubDate>Tue, 28 May 2019 00:00:00 GMT</pubDate>
-            <description><![CDATA[Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet]]></description>
+            <title><![CDATA[Create Your Own Doc io]]></title>
+            <link>https://github.com/EvanMcDowell31/EvanDocs/blog/Create Your Own Doc io</link>
+            <guid>Create Your Own Doc io</guid>
+            <pubDate>Fri, 16 Apr 2021 00:00:00 GMT</pubDate>
+            <description><![CDATA[I know this is kindof meta putting this on a Docusaurus io page, but im going to walk through how to set up your own personal io page with Docusaurus and setup github actions and gh-pages to deploy it to your personal io page.]]></description>
         </item>
     </channel>
 </rss>
