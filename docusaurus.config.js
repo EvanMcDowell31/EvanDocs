@@ -1,7 +1,7 @@
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
   title: "Evans Docs",
-  tagline: "A place to share and write",
+  tagline: "A place to write and share.",
   url: "https://github.com/EvanMcDowell31",
   baseUrl: "/EvanDocs/",
   onBrokenLinks: "throw",
