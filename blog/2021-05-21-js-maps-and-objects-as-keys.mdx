@@ -1,0 +1,172 @@
+---
+slug: JS Maps and Objects as Keys
+title: JS Maps and Objects as Keys
+author: Evan McDowell
+author_title: Software Engineer @ Ware2go
+author_url: https://github.com/EvanMcDowell31
+author_image_url: https://avatars.githubusercontent.com/u/40528617?s=400&u=1f93b55320b7de438bfb4916e3da747865f4bbcd&v=4
+tags: [docusaurus, Map, JS]
+---
+
+## What is a [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map)
+
+A Map is a data structure in JavaScript that is similar to an object, with some main differences being:
+
+- A Map remembers the original insertion order of the keys
+- Any value (both **objects** and [primitive values](https://developer.mozilla.org/en-US/docs/Glossary/Primitive)) may be used as either a **key** or a value.
+- Maps are itereable (similar to arrays) and has size property (similar to array length)
+- Performs better in scenarios involving frequent additions and removals of key-value pairs than an object.
+
+OK now we got that out of the way, we can do some exploring into this Object as keys thing MDN is talking about. If you're like me you like to experiment from time to time with code just to see if things will work. I am a firm believer that experimentation leads to a better understanding regardless if you succeed or not.
+In this instance learning about how we can use objects as keys with Maps.
+
+So before get to Maps we need a base understanding about objects, specifically how the equallity operator handles them. Feel free to pop open chrome console and follow along.
+
+## Object equality and references
+
+So lets talk about object equality in JavaScript. If we define two objects with the same keys and values:
+
+```js
+const obj1 = { key: "value" };
+const obj2 = { key: "value" };
+```
+
+And we use `===` triple equals as our equality operator to compare the two objects
+
+```js
+obj1 === obj2;
+```
+
+What would we expect the outcome to be?
+If you said `false` you're correct.
+While you may say thats weird, I can explain why this is. JavaScript is sort of _lazy_ in comparing objects. What I mean is that JavaScript only looks at the object reference when comparing them.
+
+### What is a reference
+
+If you have ever named a variable in code, then you have made use of a reference. To take a slightly deeper dive when something gets assigned it also gets written to computor memory. You can think of computer memory as a table that stores values at addresses. Much like a warehouse stores packages on shelves that have addresses on them, so that they know where to find things.
+So one of our objects may look like this in memory.
+
+| address     |            value |
+| ----------- | ---------------: |
+| 0012CCGWH80 | { key: "value" } |
+
+With the address being some hash value. Now since we named this variable we have an identifier, a name that points to this address. A pointer if you will.
+
+|         | address     |            value |
+| ------- | ----------- | ---------------: |
+| obj1 -> | 0012CCGWH80 | { key: "value" } |
+
+So now the user (coder) can reference values in memory through a name.
+
+Keep this in mind as we move along, it will come back up.
+
+## Maps
+
+So lets play around with Maps and object keys.
+We can instanciate a Map with an array of arrays, with the inner beeeing key value pairs.
+
+```js
+const objMap = new Map([[obj1, "value"]]);
+```
+
+So in the above example the initializer value being `[[key, value]]`. This means `obj1` becomes the **key** in the Map.
+If you're following along in the console, when you print objMap you will see something like this:
+
+<img src="../static/img/MapWithObjectsKeys.png" />
+
+## The PROBLEM
+
+So with the object reference knowlege we gained earlier, what would we expect the output to be for this get call to the Map we created:
+
+```js
+objMap.get({ key: "value" });
+```
+
+If you said `undefined`, you are most certainly correct. Because we learned earlier that JavaScript looks at the reference to the object, not the actual deep equality of the object.
+So since we passed an unnamed object here, (even though it is the same object) it has a different reference than the object key stored in the Map.
+
+So if we used the name of the key we created instead, this will work because the equality passes (becausee they share the same reference).
+
+```js
+objMap.get(obj1);
+```
+
+And you should be successful in retreiving `"value"`.
+
+### One Solution
+
+One solution would be to use hashing, not going to get into that right now though, but if you're interested [here](https://esdiscuss.org/topic/maps-with-object-keys) might be a good place to start.
+
+---
+
+## Lets Experiment
+
+Consider a Theme object, defined in an aplication, a constant object that will always have a reference.
+
+```js
+const THEME = {
+  colors: {
+    neutrals: {
+      brandLight: {
+        hex: "#fff",
+        name: "white",
+        tag: "body",
+      },
+      brandMedium: {
+        hex: "#808080",
+        name: "grey",
+        tag: "header",
+      },
+    },
+  },
+  fonts: {
+    newTimes: {
+      roman: "roman",
+    },
+  },
+};
+```
+
+Theme contains some colors, grouped by catagory and we have another object called `TAGS` which contains where color catagorys are used.
+
+```js
+const TAGS = {
+  colors: {
+    neutrals: ["header", "body"],
+  },
+};
+```
+
+Lets create a Map that maps specific colors (as objects defined with hex and other info), to that colors categorical tags.
+
+```js
+const colorToColorCategoryTags = new Map([
+  [THEME.colors.neutrals.brandLight, THEME.tags.colors.neutrals],
+  [THEME.colors.neutrals.brandMedium, THEME.tags.colors.neutrals],
+]);
+```
+
+If you notice that the named brand colors are objects, used as keys, and thee values are the array of tags used by the color category.
+So we can use this map like so (with named references):
+
+```js
+colorToColorCategoryTags.get(THEME.colors.neutrals.brandLight);
+```
+
+Which will return our array of tags.
+
+## Conclusion
+
+You may ask why would you do this, well you most likely won't. **BUT** its always good to know what the technology you use can do, and what you can do with your technology.
+To get a deeper understanding of things, I will always be in favor of experiementation. This is how people find neat and easier ways to do things.
+
+Ofcourse a more practical example of a Map use would be like a filter on a table, something you add and remove keys on, here it would have better preformance than a vanilla object.
+
+Obviously there are many different ways to do things with code, and personally if I wanted to get tags of color categorys like our example here, I dont know if a Map would be my go-to solution. But it is a clean readable way to do it, which in my book counts for most of its score points on the _"Would I use this"_ scale.
+
+---
+
+Sources:
+
+- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map
+- https://esdiscuss.org/topic/maps-with-object-keys
